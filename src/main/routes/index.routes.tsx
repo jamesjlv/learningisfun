@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Routes as RoutesEnum } from "./enums/Routes";
-import { manufactureWelcomeScreen } from "../screens";
+import { ManufactureWelcomeScreen } from "../screens";
 
 export const navigationRef = React.createRef<NavigationContainerRef<any>>();
 
@@ -17,7 +17,7 @@ export const Routes: React.FC = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name={RoutesEnum.Welcome}
-          component={manufactureWelcomeScreen}
+          component={ManufactureWelcomeScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

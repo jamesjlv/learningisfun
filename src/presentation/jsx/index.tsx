@@ -1,2 +1,2 @@
 export * from "./welcome";
-export * from "./wordsList";
+export * from "./exercises";
