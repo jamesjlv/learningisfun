@@ -1,6 +1,6 @@
 import { ButtonComponent } from "@/presentation/components";
 import { scale } from "@/shared/styles";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Wrapper = styled.ImageBackground.attrs({
   resizeMode: "cover",
@@ -83,14 +83,15 @@ export const Word = styled.View.attrs({
   shadowRadius: 5.97,
   elevation: 21,
 })`
-  height: ${scale(43)}px;
-  background-color: ${({ theme }) => theme.colors.primary.white};
-  align-items: center;
-  justify-content: center;
-  padding: ${({ theme }) => theme.moderateSize.regular}
-    ${({ theme }) => theme.moderateSize.medium};
-  margin-right: ${({ theme }) => theme.moderateSize.medium};
-  border-radius: ${({ theme }) => theme.moderateSize.medium};
+  ${({ theme }) => css`
+    height: ${scale(43)}px;
+    background-color: ${theme.colors.primary.white};
+    align-items: center;
+    justify-content: center;
+    padding: ${theme.moderateSize.regular} ${theme.moderateSize.medium};
+    margin-right: ${theme.moderateSize.medium};
+    border-radius: ${theme.moderateSize.medium};
+  `}
 `;
 
 export const WordButton = styled.TouchableOpacity.attrs({
