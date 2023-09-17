@@ -9,7 +9,7 @@ interface IGetSentencesService {
 export namespace GetSentencesServiceNamespace {
   export type Params = { origin: string; translation: string };
 
-  export type Model = ISentencesModel;
+  export type Model = ISentencesModel[];
 
   export type Interface = IGetSentencesService;
 }

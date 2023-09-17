@@ -66,10 +66,7 @@ export class FirestoreClient implements DatabaseClient<any> {
 
     return {
       statusCode,
-      body: {
-        ...databaseResponse?.docs?.[0]?.data(),
-        documentId: databaseResponse?.docs?.[0]?.ref?.id,
-      },
+      body: [...databaseResponse?.docs?.map((item) => item.data())],
     };
   }
 

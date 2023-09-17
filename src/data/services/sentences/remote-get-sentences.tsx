@@ -36,7 +36,7 @@ export class GetRemoteSentencesService
 
     switch (response.statusCode) {
       case DatabaseReturnStatusCode.success:
-        return response.body as GetSentencesServiceNamespace.Model;
+        return response.body as unknown as GetSentencesServiceNamespace.Model;
       case DatabaseReturnStatusCode.forbidden:
         throw new Error("Problem to get sentences, please try again later.");
       default:

@@ -78,5 +78,5 @@ export enum DatabaseMethods {
 
 export type DatabaseResponse<T = any> = {
   statusCode: DatabaseReturnStatusCode;
-  body: T;
+  body: T[];
 };
