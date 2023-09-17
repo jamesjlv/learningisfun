@@ -124,12 +124,13 @@ export const ExercisesScreen = () => {
           setCurrentStatus("error");
         }
       } else {
-        if (sentences?.length >= currentPosition) {
-          setSelectedWord(undefined);
-          setCurrentStatus("waiting");
-          return;
-        }
-        setCurrentPosition((prevState) => prevState + 1);
+        setCurrentPosition((prevState) => {
+          if (sentences?.length && sentences.length <= prevState + 1) {
+            return 0;
+          } else {
+            return prevState + 1;
+          }
+        });
         setSelectedWord(undefined);
         setCurrentStatus("waiting");
       }
@@ -159,7 +160,9 @@ export const ExercisesScreen = () => {
           <FeedbackStatus>
             <Status>
               {currentStatus === "error"
-                ? `Answer: ${exercise?.choosedWord}`
+                ? `Answer: ${exercise?.wordsMatch?.filter(
+                    (item) => item.origin === exercise.choosedWord,
+                  )?.[0]?.translation}`
                 : "Great Job!"}
             </Status>
             <FlagSvg />

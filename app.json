@@ -1,10 +1,8 @@
 {
   "expo": {
-    "name": "learningisfun",
+    "name": "Learning By Playing",
     "slug": "learningisfun",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   }
 }
