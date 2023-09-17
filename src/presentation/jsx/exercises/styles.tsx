@@ -1,6 +1,7 @@
 import { ButtonComponent } from "@/presentation/components";
 import { scale } from "@/shared/styles";
 import styled, { css } from "styled-components/native";
+import { ButtonFeedbackContainerStyleProps } from "./props";
 
 export const Wrapper = styled.ImageBackground.attrs({
   resizeMode: "cover",
@@ -78,7 +79,7 @@ export const Words = styled.View`
 `;
 
 export const Word = styled.View.attrs({
-  shadowColor: "#000",
+  shadowColor: "rgb(0, 0, 0)",
   shadowOffset: {
     width: 0,
     height: 5,
@@ -117,7 +118,9 @@ export const WordTitle = styled.Text<{ selected: boolean }>`
 
 export const Continue = styled(ButtonComponent).attrs(({ theme }) => ({
   elements: {
-    buttonContainer: { style: { width: "100%" } },
+    buttonContainer: {
+      style: { width: "100%", marginTop: scale(theme.sizes.xMedium) },
+    },
     textProps: {
       style: {
         fontSize: scale(theme.sizes.regular),
@@ -127,3 +130,33 @@ export const Continue = styled(ButtonComponent).attrs(({ theme }) => ({
     },
   },
 }))``;
+
+export const ButtonFeedbackContainer = styled.View<ButtonFeedbackContainerStyleProps>`
+  width: 100%;
+  position: absolute;
+  background-color: ${({ theme, styleType }) =>
+    styleType === "waiting"
+      ? "transparent"
+      : styleType === "error"
+      ? theme.colors.text.error
+      : styleType === "active"
+      ? "transparent"
+      : theme.colors.button.active};
+  border-radius: ${scale(32)}px;
+  padding: ${({ theme }) => theme.moderateSize.large};
+  height: ${scale(160)}px;
+`;
+
+export const FeedbackStatus = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 ${({ theme }) => theme.moderateSize.medium};
+`;
+
+export const Status = styled.Text`
+  ${({ theme }) => css`
+    ${theme.text.inter.extraBold}
+    color: ${theme.colors.primary.white};
+    font-size: ${theme.moderateSize.medium};
+  `}
+`;

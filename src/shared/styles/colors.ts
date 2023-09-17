@@ -13,5 +13,13 @@ export const Colors = {
     contrast: "#FFFFFF",
     waiting: "#6392A6",
     disabled: "#9EB6C2",
+    error: "#FFFFFF",
+  },
+  text: {
+    active: "#FFFFFF",
+    contrast: "#00E1E8",
+    waiting: "#FFFFFF",
+    disabled: "#FF7C89",
+    error: "#FF7C89",
   },
 };

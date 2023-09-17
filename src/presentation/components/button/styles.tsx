@@ -14,9 +14,9 @@ export const Container = styled.TouchableOpacity.attrs({
 `;
 
 export const Title = styled.Text<ButtonComponentStyleProps>`
-  ${({ theme }) => css`
+  ${({ theme, styleType }) => css`
     ${theme.text.inter.semiBold}
     font-size: ${theme.moderateSize.medium};
-    color: ${theme.colors.primary.white};
+    color: ${theme.colors.text[styleType]};
   `}
 `;

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 
 import {
+  ButtonFeedbackContainer,
   Container,
   Continue,
+  FeedbackStatus,
   FocusedWord,
   HowToPlay,
   MainSentence,
   SentenceToTranslate,
   SentenceTranslatedWrapper,
   SpaceForSelectedWord,
+  Status,
   Word,
   WordButton,
   WordTitle,
@@ -16,10 +19,11 @@ import {
   Wrapper,
 } from "./styles";
 import { useRoute } from "@react-navigation/native";
-import { ExercisesRoutesProps } from "./props";
+import { ButtonTitle, ExercisesRoutesProps } from "./props";
 import { useExercices } from "@/presentation/hooks";
 import { ActivityIndicator } from "react-native";
-
+import FlagSvg from "@assets/icons/flag.svg";
+import { ButtonComponentProps } from "@/presentation/components/button/props";
 export const ExercisesScreen = () => {
   const params = useRoute().params as ExercisesRoutesProps;
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +31,8 @@ export const ExercisesScreen = () => {
   const { sentences, handleGetSentences } = useExercices();
   const exercise = sentences?.at(currentPosition);
   const [selectedWord, setSelectedWord] = useState<string>();
+  const [currentStatus, setCurrentStatus] =
+    useState<ButtonComponentProps["styleType"]>("waiting");
 
   const handleFetchSentences = async () => {
     try {
@@ -57,7 +63,13 @@ export const ExercisesScreen = () => {
     return (
       <Words>
         {exercise?.answerOptions?.map((item) => (
-          <WordButton key={item} onPress={() => setSelectedWord(item)}>
+          <WordButton
+            key={item}
+            onPress={() => {
+              setSelectedWord(item);
+              setCurrentStatus("active");
+            }}
+          >
             <Word selected={selectedWord === item}>
               <WordTitle selected={selectedWord === item}>{item}</WordTitle>
             </Word>
@@ -78,20 +90,50 @@ export const ExercisesScreen = () => {
 
     return (
       <SentenceTranslatedWrapper>
-        <SentenceToTranslate>{sentenceSplited[0]}</SentenceToTranslate>
+        <SentenceToTranslate>{sentenceSplited?.[0]}</SentenceToTranslate>
         <SpaceForSelectedWord
           selected={!!selectedWord}
-          onPress={() => setSelectedWord(undefined)}
+          onPress={() => {
+            setSelectedWord(undefined);
+            setCurrentStatus("waiting");
+          }}
         >
           {selectedWord && (
-            <Word style={{ marginRight: 0 }}>
-              <WordTitle>{selectedWord}</WordTitle>
+            <Word style={{ marginRight: 0 }} selected={false}>
+              <WordTitle selected={false}>{selectedWord}</WordTitle>
             </Word>
           )}
         </SpaceForSelectedWord>
-        <SentenceToTranslate>{sentenceSplited[1]}</SentenceToTranslate>
+        <SentenceToTranslate>{sentenceSplited?.[1]}</SentenceToTranslate>
       </SentenceTranslatedWrapper>
     );
+  };
+
+  const handleIfWordMatchs = () => {
+    const wordTranslated = exercise?.wordsMatch?.filter(
+      (item) => item.origin === exercise.choosedWord,
+    )?.[0]?.translation;
+    try {
+      if (!selectedWord) {
+        return;
+      }
+      if (currentStatus === "active") {
+        if (selectedWord === wordTranslated) {
+          setCurrentStatus("contrast");
+        } else {
+          setCurrentStatus("error");
+        }
+      } else {
+        if (sentences?.length >= currentPosition) {
+          setSelectedWord(undefined);
+          setCurrentStatus("waiting");
+          return;
+        }
+        setCurrentPosition((prevState) => prevState + 1);
+        setSelectedWord(undefined);
+        setCurrentStatus("waiting");
+      }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -109,15 +151,29 @@ export const ExercisesScreen = () => {
             {renderMainSentence()}
             {renderSentenceTranslated()}
             {renderWords()}
-            <Continue
-              text="CONTINUE"
-              onPress={() => {}}
-              disabled={false}
-              loading={false}
-            />
           </>
         )}
       </Container>
+      <ButtonFeedbackContainer styleType={currentStatus}>
+        {currentStatus !== "waiting" && currentStatus !== "active" ? (
+          <FeedbackStatus>
+            <Status>
+              {currentStatus === "error"
+                ? `Answer: ${exercise?.choosedWord}`
+                : "Great Job!"}
+            </Status>
+            <FlagSvg />
+          </FeedbackStatus>
+        ) : null}
+
+        <Continue
+          text={ButtonTitle[currentStatus || "waiting"]}
+          onPress={handleIfWordMatchs}
+          disabled={false}
+          loading={false}
+          styleType={currentStatus}
+        />
+      </ButtonFeedbackContainer>
     </Wrapper>
   );
 };

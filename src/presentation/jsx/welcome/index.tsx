@@ -23,13 +23,13 @@ export const WelcomeScreen = () => {
         <Title>The most fun way to learn a language.</Title>
         <ButtonWrapper>
           <Button
-            text="Learn English"
+            text="Learn German"
             onPress={() => handleNavigate("english", "german")}
             disabled={false}
             loading={false}
           />
           <Button
-            text="Learn German"
+            text="Learn English"
             onPress={() => handleNavigate("german", "english")}
             disabled={false}
             loading={false}
