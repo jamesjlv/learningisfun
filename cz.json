@@ -1,0 +1,107 @@
+{
+  "commitizen": {
+    "name": "cz_customize",
+    "style": [
+      ["qmark", "fg:#ff9d00 bold"],
+      ["question", "bold"],
+      ["answer", "fg:#ff9d00 bold"],
+      ["pointer", "fg:#ff9d00 bold"],
+      ["highlighted", "fg:#ff9d00 bold"],
+      ["selected", "fg:#cc5454"],
+      ["separator", "fg:#cc5454"],
+      ["instruction", ""],
+      ["text", ""],
+      ["disabled", "fg:#858585 italic"]
+    ],
+    "customize": {
+      "message_template": "{{change_type}}{% if scope|length > 0 %}({{scope}}){% endif %}: {% if card|length > 0 %}FLUYO-{{card}} {% endif %}{{message}}{% if coauthored|length > 0 %}\n\nCo-authored-by: {{coauthored}}{% endif %}",
+      "example": "feature(buttons): added a new behavior to button component",
+      "change_type_order": [
+        "DOCS",
+        "REFACTOR",
+        "FIX",
+        "STYLE",
+        "FEAT",
+        "BREAKING",
+        "OPS",
+        "TEST",
+        "CHORE"
+      ],
+      "change_scope_order": ["null", "internal", "release"],
+      "questions": [
+        {
+          "message": "Inform the type of this commit:",
+          "type": "list",
+          "name": "change_type",
+          "choices": [
+            {
+              "value": "DOCS",
+              "name": "DOCS:  updates to documentation such as a the README or other markdown files"
+            },
+            {
+              "value": "REFACTOR",
+              "name": "REFACTOR: refactored code that neither fixes a bug nor adds a feature"
+            },
+            {
+              "value": "FIX",
+              "name": "FIX: a bug fix has occurred"
+            },
+            {
+              "value": "STYLE",
+              "name": "STYLE: changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on."
+            },
+            {
+              "value": "FEAT",
+              "name": "FEAT: a new feature is introduced with the changes"
+            },
+            {
+              "value": "BREAKING",
+              "name": "BREAKING: breaking change within the commit"
+            },
+            {
+              "value": "OPS",
+              "name": "OPS: changes that affect the build system or external dependencies"
+            },
+            {
+              "value": "TEST",
+              "name": "TEST: including new or correcting previous tests"
+            },
+            {
+              "value": "CHORE",
+              "name": "CHORE: changes that do not relate to a fix or feature"
+            }
+          ]
+        },
+        {
+          "message": "If the commit has a number, please informe the number",
+          "type": "input",
+          "name": "card"
+        },
+        {
+          "message": "Inform the title of this commit:",
+          "type": "input",
+          "name": "message"
+        },
+        {
+          "message": "Inform the scope of this commit:",
+          "type": "list",
+          "name": "scope",
+          "choices": [
+            {
+              "value": "",
+              "name": "null: Dont have a scope"
+            },
+            {
+              "value": "internal",
+              "name": "internal: Just internal changes, will not need a release."
+            },
+            {
+              "value": "release",
+              "name": "release: The changes requires a new version."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

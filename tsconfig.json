@@ -1,0 +1,31 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "jsx": "react",
+    "strict": true,
+    "baseUrl": "./",
+    "allowJs": true,
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@domain": ["./src/domain"],
+      "@": ["./src"],
+      "@shared": ["./src/shared"],
+      "@presentation": ["./src/presentation"],
+      "@main": ["./src/main"],
+      "@infra": ["./src/infra"],
+      "@data": ["./src/data"],
+      "@assets/*": ["./src/assets/*"],
+      "@constants": ["./src/constants"]
+    },
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "useUnknownInCatchVariables": false,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*", "src/**/*.json"],
+  "buildOptions": {},
+  "compileOnSave": true
+}

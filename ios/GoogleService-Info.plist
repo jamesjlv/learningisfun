@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyC_0P5M20C4WBYzaRCl5DIR6LPLut62Lmk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>818165534795</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.name.learningisfun</string>
+	<key>PROJECT_ID</key>
+	<string>learningisfun-3bd57</string>
+	<key>STORAGE_BUCKET</key>
+	<string>learningisfun-3bd57.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:818165534795:ios:c54624f59d46a60a8dbdce</string>
+</dict>
+</plist>

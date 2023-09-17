@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "818165534795",
+    "project_id": "learningisfun-3bd57",
+    "storage_bucket": "learningisfun-3bd57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818165534795:android:51b1525bf17aa03f8dbdce",
+        "android_client_info": {
+          "package_name": "com.learningisfun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6-xa3-9eMPLa1hfZ-jUj0nVR2BxrfDuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
