@@ -86,9 +86,7 @@ export class FirestoreClient implements DatabaseClient<any> {
 
     return {
       statusCode,
-      body: {
-        documentId: databaseResponse?.id,
-      },
+      body: [{ documentId: databaseResponse?.id }],
     };
   }
 

@@ -56,12 +56,16 @@ export const SentenceToTranslate = styled.Text`
   font-size: ${({ theme }) => theme.moderateSize.xMedium};
 `;
 
-export const SpaceForSelectedWord = styled.View`
-  height: 100%;
+export const SpaceForSelectedWord = styled.TouchableOpacity<{
+  selected: boolean;
+}>`
   border-bottom-color: ${({ theme }) => theme.colors.primary.white};
-  width: ${({ theme }) => theme.moderateSize.xmLarge};
-  border-bottom-width: 1px;
+  width: ${({ theme, selected }) =>
+    selected ? undefined : theme.moderateSize.xmLarge};
+  border-bottom-width: ${({ selected }) => (selected ? 0 : 1)}px;
   margin: 0 ${({ theme }) => theme.moderateSize.small};
+  justify-content: flex-end;
+  margin-bottom: -${({ selected }) => (selected ? scale(8) : 0)}px;
 `;
 
 export const Words = styled.View`
@@ -82,10 +86,12 @@ export const Word = styled.View.attrs({
   shadowOpacity: 0.53,
   shadowRadius: 5.97,
   elevation: 21,
-})`
-  ${({ theme }) => css`
+})<{ selected: boolean }>`
+  ${({ theme, selected }) => css`
     height: ${scale(43)}px;
-    background-color: ${theme.colors.primary.white};
+    background-color: ${selected
+      ? theme.colors.button.disabled
+      : theme.colors.primary.white};
     align-items: center;
     justify-content: center;
     padding: ${theme.moderateSize.regular} ${theme.moderateSize.medium};
@@ -101,7 +107,13 @@ export const WordButton = styled.TouchableOpacity.attrs({
   margin-bottom: ${({ theme }) => theme.moderateSize.medium};
 `;
 
-export const WordTitle = styled.Text``;
+export const WordTitle = styled.Text<{ selected: boolean }>`
+  ${({ theme, selected }) => css`
+    ${theme.text.inter.semiBold}
+    color: ${selected ? "transparent" : theme.colors.primary.blueDark};
+    font-size: ${theme.moderateSize.xRegular};
+  `}
+`;
 
 export const Continue = styled(ButtonComponent).attrs(({ theme }) => ({
   elements: {

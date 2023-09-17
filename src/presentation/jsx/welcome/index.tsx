@@ -8,9 +8,9 @@ import { Routes } from "@/main";
 export const WelcomeScreen = () => {
   const { navigate } = useNavigation();
 
-  const handleNavigate = (language: string) => {
+  const handleNavigate = (language: string, translation: string) => {
     try {
-      navigate(Routes.Exercises, { origin: language });
+      navigate(Routes.Exercises, { origin: language, translation });
     } catch (error) {
       console.error("Can not navigate");
     }
@@ -24,13 +24,13 @@ export const WelcomeScreen = () => {
         <ButtonWrapper>
           <Button
             text="Learn English"
-            onPress={() => handleNavigate("english")}
+            onPress={() => handleNavigate("english", "german")}
             disabled={false}
             loading={false}
           />
           <Button
             text="Learn German"
-            onPress={() => handleNavigate("german")}
+            onPress={() => handleNavigate("german", "english")}
             disabled={false}
             loading={false}
           />
