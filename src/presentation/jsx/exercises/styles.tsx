@@ -42,32 +42,9 @@ export const FocusedWord = styled.Text`
   text-decoration-color: ${({ theme }) => theme.colors.primary.white};
 `;
 
-export const SentenceTranslatedWrapper = styled.View`
-  flex-direction: row;
-`;
-
 export const Hint = styled.View``;
 
 export const HintText = styled.Text``;
-
-export const SentenceToTranslate = styled.Text`
-  ${({ theme }) => theme.text.inter.medium}
-  margin-top: ${({ theme }) => theme.moderateSize.xmLarge};
-  color: ${({ theme }) => theme.colors.primary.white};
-  font-size: ${({ theme }) => theme.moderateSize.xMedium};
-`;
-
-export const SpaceForSelectedWord = styled.TouchableOpacity<{
-  selected: boolean;
-}>`
-  border-bottom-color: ${({ theme }) => theme.colors.primary.white};
-  width: ${({ theme, selected }) =>
-    selected ? undefined : theme.moderateSize.xmLarge};
-  border-bottom-width: ${({ selected }) => (selected ? 0 : 1)}px;
-  margin: 0 ${({ theme }) => theme.moderateSize.small};
-  justify-content: flex-end;
-  margin-bottom: -${({ selected }) => (selected ? scale(8) : 0)}px;
-`;
 
 export const Words = styled.View`
   flex: 1;

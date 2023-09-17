@@ -1,5 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { ActivityIndicator } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
+import FlagSvg from "@assets/icons/flag.svg";
+import { useExercices } from "@/presentation/hooks";
+import { ButtonComponentProps } from "@/presentation/components/button/props";
+import {
+  SentenceLineComponent,
+  WordComponent,
+} from "@/presentation/components";
 import {
   ButtonFeedbackContainer,
   Container,
@@ -8,23 +17,11 @@ import {
   FocusedWord,
   HowToPlay,
   MainSentence,
-  SentenceToTranslate,
-  SentenceTranslatedWrapper,
-  SpaceForSelectedWord,
   Status,
-  Word,
-  WordButton,
-  WordTitle,
   Words,
   Wrapper,
 } from "./styles";
-import { useRoute } from "@react-navigation/native";
 import { ButtonTitle, ExercisesRoutesProps } from "./props";
-import { useExercices } from "@/presentation/hooks";
-import { ActivityIndicator } from "react-native";
-import FlagSvg from "@assets/icons/flag.svg";
-import { ButtonComponentProps } from "@/presentation/components/button/props";
-import { WordComponent } from "@/presentation/components";
 
 export const ExercisesScreen = () => {
   const params = useRoute().params as ExercisesRoutesProps;
@@ -88,35 +85,17 @@ export const ExercisesScreen = () => {
   };
 
   const renderSentenceTranslated = () => {
-    const wordTranslated = exercise?.wordsMatch.filter(
-      (item) => item.origin === exercise.choosedWord,
-    )?.[0]?.translation;
-
-    const sentenceSplited = exercise?.sentenceTranslated?.split(
-      wordTranslated!,
-    )!;
-
     return (
-      <SentenceTranslatedWrapper>
-        <SentenceToTranslate>{sentenceSplited?.[0]}</SentenceToTranslate>
-        <SpaceForSelectedWord
-          selected={!!selectedWord}
-          onPress={() => {
-            setSelectedWord(undefined);
-            setCurrentStatus("waiting");
-          }}
-        >
-          {selectedWord && (
-            <WordComponent
-              disabled
-              word={selectedWord}
-              selected={false}
-              type="secondary"
-            />
-          )}
-        </SpaceForSelectedWord>
-        <SentenceToTranslate>{sentenceSplited?.[1]}</SentenceToTranslate>
-      </SentenceTranslatedWrapper>
+      <SentenceLineComponent
+        sentence={exercise?.sentenceTranslated}
+        wordsMatch={exercise?.wordsMatch}
+        wordToReplace={exercise?.choosedWord}
+        onPress={() => {
+          setSelectedWord(undefined);
+          setCurrentStatus("waiting");
+        }}
+        selectedWord={selectedWord}
+      />
     );
   };
 
