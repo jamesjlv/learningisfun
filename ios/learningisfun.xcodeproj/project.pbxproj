@@ -19,7 +19,7 @@
 
 /* Begin PBXFileReference section */
 		062168332AB69E94003B86BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* learningisfun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learningisfun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Learn by Playing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learn by Playing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = learningisfun/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = learningisfun/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = learningisfun/Images.xcassets; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* learningisfun.app */,
+				13B07F961A680F5B00A75B9A /* Learn by Playing.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,7 +158,7 @@
 			);
 			name = learningisfun;
 			productName = learningisfun;
-			productReference = 13B07F961A680F5B00A75B9A /* learningisfun.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Learn by Playing.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -364,6 +364,7 @@
 				);
 				INFOPLIST_FILE = learningisfun/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Learning By Playing";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -377,7 +378,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.name.learningisfun;
-				PRODUCT_NAME = learningisfun;
+				PRODUCT_NAME = "Learn by Playing";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -393,6 +394,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = learningisfun/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Learning By Playing";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -406,7 +408,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = org.name.learningisfun;
-				PRODUCT_NAME = learningisfun;
+				PRODUCT_NAME = "Learn by Playing";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
