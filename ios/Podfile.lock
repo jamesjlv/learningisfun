@@ -466,6 +466,8 @@ PODS:
   - RNFBApp (18.4.0):
     - Firebase/CoreOnly (= 10.14.0)
     - React-Core
+  - RNGestureHandler (2.12.1):
+    - React-Core
   - RNReanimated (3.5.2):
     - DoubleConversion
     - FBLazyVector
@@ -552,6 +554,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -665,6 +668,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -728,6 +733,7 @@ SPEC CHECKSUMS:
   React-utils: f1698e2edc6cac636a692ce218e9f0722d02922f
   ReactCommon: e4525ff7a20c7452a3b3e3ef79d9e83cb31ec33f
   RNFBApp: af276a038f2e1488d59920697bba97b43f83164c
+  RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
   RNReanimated: 2491645f0883526f4470d8b5c761308709ba31f8
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
