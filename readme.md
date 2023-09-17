@@ -1,6 +1,6 @@
 # Learning is Fun
 
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=In Development&color=GREEN&style=for-the-badge)
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=InDevelopment&color=GREEN&style=for-the-badge)
 
 ## Description
 
