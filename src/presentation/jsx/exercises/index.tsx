@@ -24,6 +24,7 @@ import { useExercices } from "@/presentation/hooks";
 import { ActivityIndicator } from "react-native";
 import FlagSvg from "@assets/icons/flag.svg";
 import { ButtonComponentProps } from "@/presentation/components/button/props";
+import { WordComponent } from "@/presentation/components";
 
 export const ExercisesScreen = () => {
   const params = useRoute().params as ExercisesRoutesProps;
@@ -63,25 +64,28 @@ export const ExercisesScreen = () => {
     );
   };
 
-  const renderWords = useMemo(() => {
+  const renderWords = () => {
     return (
       <Words>
         {exercise?.answerOptions?.map((item, index) => (
-          <WordButton
+          <WordComponent
             key={item + index}
             onPress={() => {
               setSelectedWord(item);
               setCurrentStatus("active");
             }}
-          >
-            <Word selected={selectedWord === item}>
-              <WordTitle selected={selectedWord === item}>{item}</WordTitle>
-            </Word>
-          </WordButton>
+            word={item}
+            selected={selectedWord === item}
+            type={
+              currentStatus === "contrast" || currentStatus === "error"
+                ? "disabled"
+                : "primary"
+            }
+          />
         ))}
       </Words>
     );
-  }, [exercise]);
+  };
 
   const renderSentenceTranslated = () => {
     const wordTranslated = exercise?.wordsMatch.filter(
@@ -103,9 +107,12 @@ export const ExercisesScreen = () => {
           }}
         >
           {selectedWord && (
-            <Word style={{ marginRight: 0 }} selected={false}>
-              <WordTitle selected={false}>{selectedWord}</WordTitle>
-            </Word>
+            <WordComponent
+              disabled
+              word={selectedWord}
+              selected={false}
+              type="secondary"
+            />
           )}
         </SpaceForSelectedWord>
         <SentenceToTranslate>{sentenceSplited?.[1]}</SentenceToTranslate>
@@ -119,7 +126,7 @@ export const ExercisesScreen = () => {
     )?.[0]?.translation;
     try {
       if (!selectedWord) {
-        return;
+        throw new Error("Word not selected");
       }
       if (currentStatus === "active") {
         if (selectedWord === wordTranslated) {
@@ -138,7 +145,9 @@ export const ExercisesScreen = () => {
         setSelectedWord(undefined);
         setCurrentStatus("waiting");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -155,7 +164,7 @@ export const ExercisesScreen = () => {
           <>
             {renderMainSentence()}
             {renderSentenceTranslated()}
-            {renderWords}
+            {renderWords()}
           </>
         )}
       </Container>

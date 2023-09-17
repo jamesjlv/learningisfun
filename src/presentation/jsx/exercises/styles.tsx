@@ -78,44 +78,6 @@ export const Words = styled.View`
   justify-content: center;
 `;
 
-export const Word = styled.View.attrs({
-  shadowColor: "rgb(0, 0, 0)",
-  shadowOffset: {
-    width: 0,
-    height: 5,
-  },
-  shadowOpacity: 0.53,
-  shadowRadius: 5.97,
-  elevation: 21,
-})<{ selected: boolean }>`
-  ${({ theme, selected }) => css`
-    height: ${scale(43)}px;
-    background-color: ${selected
-      ? theme.colors.button.disabled
-      : theme.colors.primary.white};
-    align-items: center;
-    justify-content: center;
-    padding: ${theme.moderateSize.regular} ${theme.moderateSize.medium};
-    margin-right: ${theme.moderateSize.medium};
-    border-radius: ${theme.moderateSize.medium};
-  `}
-`;
-
-export const WordButton = styled.TouchableOpacity.attrs({
-  activeOpacity: 0.7,
-})`
-  height: ${scale(43)}px;
-  margin-bottom: ${({ theme }) => theme.moderateSize.medium};
-`;
-
-export const WordTitle = styled.Text<{ selected: boolean }>`
-  ${({ theme, selected }) => css`
-    ${theme.text.inter.semiBold}
-    color: ${selected ? "transparent" : theme.colors.primary.blueDark};
-    font-size: ${theme.moderateSize.xRegular};
-  `}
-`;
-
 export const Continue = styled(ButtonComponent).attrs(({ theme }) => ({
   elements: {
     buttonContainer: {
