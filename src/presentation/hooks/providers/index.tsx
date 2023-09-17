@@ -1,6 +1,7 @@
 import React from "react";
 import { AppThemeProvider } from "./theme";
 import { NavigationProvider } from "./navigation";
+import { ExercisesProvider } from "./exercises";
 
 interface ApplicationContextProviderManagementProps {
   children: React.ReactNode;
@@ -11,7 +12,9 @@ export const ApplicationContextProviderManagement: React.FC<
 > = ({ children }) => {
   return (
     <NavigationProvider>
-      <AppThemeProvider>{children}</AppThemeProvider>
+      <ExercisesProvider>
+        <AppThemeProvider>{children}</AppThemeProvider>
+      </ExercisesProvider>
     </NavigationProvider>
   );
 };
