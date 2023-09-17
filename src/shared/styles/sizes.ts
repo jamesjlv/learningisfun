@@ -1,0 +1,18 @@
+export const Size = {
+  zero: 0,
+  min: 1,
+  smallest: 4,
+  small: 8,
+  xsmall: 10,
+  regular: 12,
+  xRegular: 14,
+  medium: 16,
+  xxMedium: 16,
+  xMedium: 20,
+  large: 24,
+  xLarge: 32,
+  xmLarge: 40,
+  xxLarge: 48,
+  xxxLarge: 56,
+  largest: 64,
+};
