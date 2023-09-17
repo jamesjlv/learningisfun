@@ -59,3 +59,8 @@ Run in a develop mode, you can run this command bellow in your terminal
 ```shell
 yarn ios
 ```
+
+## Preview 
+
+https://github.com/jamesjlv/learningisfun/assets/63821594/1d834414-3f32-43e0-ad57-abc55dd1fc1e
+
