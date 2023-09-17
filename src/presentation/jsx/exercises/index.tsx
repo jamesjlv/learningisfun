@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import {
   ButtonFeedbackContainer,
@@ -24,15 +24,19 @@ import { useExercices } from "@/presentation/hooks";
 import { ActivityIndicator } from "react-native";
 import FlagSvg from "@assets/icons/flag.svg";
 import { ButtonComponentProps } from "@/presentation/components/button/props";
+
 export const ExercisesScreen = () => {
   const params = useRoute().params as ExercisesRoutesProps;
   const [isLoading, setIsLoading] = useState(true);
   const [currentPosition, setCurrentPosition] = useState(0);
   const { sentences, handleGetSentences } = useExercices();
-  const exercise = sentences?.at(currentPosition);
   const [selectedWord, setSelectedWord] = useState<string>();
   const [currentStatus, setCurrentStatus] =
     useState<ButtonComponentProps["styleType"]>("waiting");
+
+  const exercise = useMemo(() => {
+    return sentences?.at(currentPosition);
+  }, [currentPosition, sentences]);
 
   const handleFetchSentences = async () => {
     try {
@@ -59,12 +63,12 @@ export const ExercisesScreen = () => {
     );
   };
 
-  const renderWords = () => {
+  const renderWords = useMemo(() => {
     return (
       <Words>
-        {exercise?.answerOptions?.map((item) => (
+        {exercise?.answerOptions?.map((item, index) => (
           <WordButton
-            key={item}
+            key={item + index}
             onPress={() => {
               setSelectedWord(item);
               setCurrentStatus("active");
@@ -77,7 +81,7 @@ export const ExercisesScreen = () => {
         ))}
       </Words>
     );
-  };
+  }, [exercise]);
 
   const renderSentenceTranslated = () => {
     const wordTranslated = exercise?.wordsMatch.filter(
@@ -151,7 +155,7 @@ export const ExercisesScreen = () => {
           <>
             {renderMainSentence()}
             {renderSentenceTranslated()}
-            {renderWords()}
+            {renderWords}
           </>
         )}
       </Container>
