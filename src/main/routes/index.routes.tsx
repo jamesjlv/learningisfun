@@ -3,7 +3,10 @@ import {
   NavigationContainer,
   NavigationContainerRef,
 } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  TransitionPresets,
+  createStackNavigator,
+} from "@react-navigation/stack";
 import { Routes as RoutesEnum } from "./enums/Routes";
 import { ManufactureWelcomeScreen } from "../screens";
 
@@ -14,7 +17,12 @@ export const Routes: React.FC = () => {
 
   return (
     <NavigationContainer ref={navigationRef} independent={true}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          ...TransitionPresets.ScaleFromCenterAndroid,
+        }}
+      >
         <Stack.Screen
           name={RoutesEnum.Welcome}
           component={ManufactureWelcomeScreen}
