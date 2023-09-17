@@ -73,7 +73,7 @@
           ]
         },
         {
-          "message": "If the commit has a number, please informe the number",
+          "message": "If the commit has a number, please informe the number:",
           "type": "input",
           "name": "card"
         },
