@@ -1,0 +1,66 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/camelcase": "off",
+    "no-useless-constructor": "off",
+    "import/no-unresolved": "off",
+    "no-return-await": "off",
+    "no-return-assign": "off",
+    "no-undef": "off",
+    "import/prefer-default-export": "off",
+    "no-use-before-define": "off",
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
+    "no-nested-ternary": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
+    "@typescript-eslint/interface-name-prefix": [
+      "off",
+      { "prefixWithI": "always" }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "off",
+      { "devDependencies": ["**/*.test.js", "**/*.spec.js"] }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}
