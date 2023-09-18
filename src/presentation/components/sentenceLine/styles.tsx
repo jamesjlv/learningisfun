@@ -11,7 +11,6 @@ export const SentenceTranslatedWrapper = styled.View`
 
 export const WrapperWordAndTooltip = styled.View`
   align-items: center;
-  /* margin-right: ${({ theme }) => theme.moderateSize.smallest}; */
   margin-top: ${({ theme }) => theme.moderateSize.small};
 `;
 
