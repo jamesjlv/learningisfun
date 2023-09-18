@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import FlagSvg from "@assets/icons/flag.svg";
 import { useExercices } from "@/presentation/hooks";
@@ -22,9 +22,12 @@ import {
   Wrapper,
 } from "./styles";
 import { ButtonTitle, ExercisesRoutesProps } from "./props";
+import { useAlert } from "@/presentation/hooks/methods/alert";
 
 export const ExercisesScreen = () => {
   const params = useRoute().params as ExercisesRoutesProps;
+  const { alert } = useAlert();
+  const { goBack } = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
   const [currentPosition, setCurrentPosition] = useState(0);
   const { sentences, handleGetSentences } = useExercices();
@@ -43,6 +46,8 @@ export const ExercisesScreen = () => {
         translation: params.translation,
       });
     } catch (error) {
+      alert({ message: "We can't find any exercises.", type: "error" });
+      goBack();
       setIsLoading(false);
     } finally {
       setIsLoading(false);
@@ -125,7 +130,7 @@ export const ExercisesScreen = () => {
         setCurrentStatus("waiting");
       }
     } catch (error) {
-      console.error(error);
+      alert({ message: "Choose a word to continue.", type: "error" });
     }
   };
 
