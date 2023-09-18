@@ -13,7 +13,6 @@ import {
 } from "./styles";
 import { WordComponent } from "../word";
 import { SentenceLineComponentProps } from "./props";
-import { LayoutChangeEvent } from "react-native";
 
 export const SentenceLineComponent: React.FC<SentenceLineComponentProps> = ({
   sentence,
