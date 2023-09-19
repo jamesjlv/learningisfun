@@ -6,4 +6,5 @@ export interface SentenceLineComponentProps extends ViewProps {
   wordsMatch?: { origin: string; translation: string }[];
   onPress: () => void;
   selectedWord?: string;
+  exerciseStatus?: "waiting" | "disabled" | "contrast" | "active" | "error";
 }

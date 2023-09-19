@@ -20,6 +20,7 @@ export const SentenceLineComponent: React.FC<SentenceLineComponentProps> = ({
   onPress,
   wordsMatch,
   wordToReplace,
+  exerciseStatus = "waiting",
 }) => {
   const [isPressing, setIsPressing] = useState({ isActive: false, word: "" });
 
@@ -78,6 +79,7 @@ export const SentenceLineComponent: React.FC<SentenceLineComponentProps> = ({
               word={selectedWord}
               selected={false}
               type="secondary"
+              styleType={exerciseStatus}
             />
           )}
         </SpaceForSelectedWord>

@@ -100,6 +100,7 @@ export const ExercisesScreen = () => {
           setCurrentStatus("waiting");
         }}
         selectedWord={selectedWord}
+        exerciseStatus={currentStatus}
       />
     );
   };

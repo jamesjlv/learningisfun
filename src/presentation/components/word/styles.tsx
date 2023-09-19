@@ -3,6 +3,7 @@ import styled, { css } from "styled-components/native";
 import { WordComponentStyleProps } from "./props";
 
 export const Word = styled.View.attrs({
+  //@ts-expect-error
   shadowColor: "rgb(0, 0, 0)",
   shadowOffset: {
     width: 0,
@@ -35,6 +36,18 @@ export const Word = styled.View.attrs({
     css`
       background-color: ${theme.colors.button.disabled};
     `}
+
+    ${({ theme, styleType }) =>
+    styleType === "error" &&
+    css`
+      background-color: ${theme.colors.primary.red};
+    `}
+
+    ${({ theme, styleType }) =>
+    styleType === "contrast" &&
+    css`
+      background-color: ${theme.colors.primary.blueLight};
+    `}
 `;
 
 export const WordButton = styled.TouchableOpacity.attrs({
@@ -61,5 +74,15 @@ export const WordTitle = styled.Text<WordComponentStyleProps>`
     type === "disabled" &&
     css`
       color: ${theme.colors.text.disabled};
+    `}
+    ${({ theme, styleType }) =>
+    styleType === "error" &&
+    css`
+      color: ${theme.colors.primary.white};
+    `}
+    ${({ theme, styleType }) =>
+    styleType === "contrast" &&
+    css`
+      color: ${theme.colors.primary.white};
     `}
 `;
