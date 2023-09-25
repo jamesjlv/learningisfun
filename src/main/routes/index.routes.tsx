@@ -8,8 +8,11 @@ import {
   createStackNavigator,
 } from "@react-navigation/stack";
 import { Routes as RoutesEnum } from "./enums/Routes";
-import { ManufactureWelcomeScreen } from "../screens";
-import { ManufactureExercisesScreen } from "../screens/exercises";
+import {
+  ManufactureFinishedScreen,
+  ManufactureWelcomeScreen,
+  ManufactureExercisesScreen,
+} from "../screens";
 
 export const navigationRef = React.createRef<NavigationContainerRef<any>>();
 
@@ -32,6 +35,11 @@ export const Routes: React.FC = () => {
         <Stack.Screen
           name={RoutesEnum.Exercises}
           component={ManufactureExercisesScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={RoutesEnum.Finished}
+          component={ManufactureFinishedScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

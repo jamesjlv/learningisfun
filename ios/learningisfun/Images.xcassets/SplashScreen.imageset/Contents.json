@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "iPad Notifications 38pt.png",
+      "filename" : "App Store 1024pt.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "iPad Notifications 64pt@2x.png",
+      "filename" : "App Store 1024pt 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "iPad App 76pt@2x 1.png",
+      "filename" : "App Store 1024pt 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

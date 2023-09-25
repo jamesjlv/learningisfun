@@ -7,6 +7,7 @@ export const Colors = {
     blue: "#2B4B5D",
     white: "#FFFFFF",
     title: "#EFEFEF",
+    green: "#63A66A",
   },
   button: {
     active: "#16E3E7",
@@ -19,7 +20,7 @@ export const Colors = {
     active: "#FFFFFF",
     contrast: "#00E1E8",
     waiting: "#FFFFFF",
-    disabled: "#FF7C89",
+    disabled: "#668191",
     error: "#FF7C89",
   },
 };

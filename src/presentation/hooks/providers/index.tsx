@@ -2,6 +2,8 @@ import React from "react";
 import { AppThemeProvider } from "./theme";
 import { NavigationProvider } from "./navigation";
 import { ExercisesProvider } from "./exercises";
+import { AlertProvider } from "../methods/alert";
+import { GlobalComponents } from "@/presentation/components/global-components";
 
 interface ApplicationContextProviderManagementProps {
   children: React.ReactNode;
@@ -12,9 +14,16 @@ export const ApplicationContextProviderManagement: React.FC<
 > = ({ children }) => {
   return (
     <NavigationProvider>
-      <ExercisesProvider>
-        <AppThemeProvider>{children}</AppThemeProvider>
-      </ExercisesProvider>
+      <AlertProvider>
+        <ExercisesProvider>
+          <AppThemeProvider>
+            <>
+              {children}
+              <GlobalComponents />
+            </>
+          </AppThemeProvider>
+        </ExercisesProvider>
+      </AlertProvider>
     </NavigationProvider>
   );
 };

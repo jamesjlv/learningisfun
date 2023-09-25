@@ -1,5 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { ActivityIndicator } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useSharedValue } from "react-native-reanimated";
 
+import FlagSvg from "@assets/icons/flag.svg";
+import { useExercices } from "@/presentation/hooks";
+import { ButtonComponentProps } from "@/presentation/components/button/props";
+import {
+  SentenceLineComponent,
+  WordComponent,
+  WordListComponent,
+} from "@/presentation/components";
 import {
   ButtonFeedbackContainer,
   Container,
@@ -8,31 +19,28 @@ import {
   FocusedWord,
   HowToPlay,
   MainSentence,
-  SentenceToTranslate,
-  SentenceTranslatedWrapper,
-  SpaceForSelectedWord,
   Status,
-  Word,
-  WordButton,
-  WordTitle,
   Words,
   Wrapper,
 } from "./styles";
-import { useRoute } from "@react-navigation/native";
 import { ButtonTitle, ExercisesRoutesProps } from "./props";
-import { useExercices } from "@/presentation/hooks";
-import { ActivityIndicator } from "react-native";
-import FlagSvg from "@assets/icons/flag.svg";
-import { ButtonComponentProps } from "@/presentation/components/button/props";
+import { useAlert } from "@/presentation/hooks/methods/alert";
+import { Routes } from "@/main";
+
 export const ExercisesScreen = () => {
   const params = useRoute().params as ExercisesRoutesProps;
+  const { alert } = useAlert();
+  const { goBack, navigate } = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
   const [currentPosition, setCurrentPosition] = useState(0);
   const { sentences, handleGetSentences } = useExercices();
-  const exercise = sentences?.at(currentPosition);
   const [selectedWord, setSelectedWord] = useState<string>();
   const [currentStatus, setCurrentStatus] =
     useState<ButtonComponentProps["styleType"]>("waiting");
+
+  const exercise = useMemo(() => {
+    return sentences?.at(currentPosition);
+  }, [currentPosition, sentences]);
 
   const handleFetchSentences = async () => {
     try {
@@ -41,6 +49,8 @@ export const ExercisesScreen = () => {
         translation: params.translation,
       });
     } catch (error) {
+      alert({ message: "We can't find any exercises.", type: "error" });
+      goBack();
       setIsLoading(false);
     } finally {
       setIsLoading(false);
@@ -59,53 +69,19 @@ export const ExercisesScreen = () => {
     );
   };
 
-  const renderWords = () => {
-    return (
-      <Words>
-        {exercise?.answerOptions?.map((item) => (
-          <WordButton
-            key={item}
-            onPress={() => {
-              setSelectedWord(item);
-              setCurrentStatus("active");
-            }}
-          >
-            <Word selected={selectedWord === item}>
-              <WordTitle selected={selectedWord === item}>{item}</WordTitle>
-            </Word>
-          </WordButton>
-        ))}
-      </Words>
-    );
-  };
-
   const renderSentenceTranslated = () => {
-    const wordTranslated = exercise?.wordsMatch.filter(
-      (item) => item.origin === exercise.choosedWord,
-    )?.[0]?.translation;
-
-    const sentenceSplited = exercise?.sentenceTranslated?.split(
-      wordTranslated!,
-    )!;
-
     return (
-      <SentenceTranslatedWrapper>
-        <SentenceToTranslate>{sentenceSplited?.[0]}</SentenceToTranslate>
-        <SpaceForSelectedWord
-          selected={!!selectedWord}
-          onPress={() => {
-            setSelectedWord(undefined);
-            setCurrentStatus("waiting");
-          }}
-        >
-          {selectedWord && (
-            <Word style={{ marginRight: 0 }} selected={false}>
-              <WordTitle selected={false}>{selectedWord}</WordTitle>
-            </Word>
-          )}
-        </SpaceForSelectedWord>
-        <SentenceToTranslate>{sentenceSplited?.[1]}</SentenceToTranslate>
-      </SentenceTranslatedWrapper>
+      <SentenceLineComponent
+        sentence={exercise?.sentenceTranslated}
+        wordsMatch={exercise?.wordsMatch}
+        wordToReplace={exercise?.choosedWord}
+        onPress={() => {
+          setSelectedWord(undefined);
+          setCurrentStatus("waiting");
+        }}
+        selectedWord={selectedWord}
+        exerciseStatus={currentStatus}
+      />
     );
   };
 
@@ -115,7 +91,7 @@ export const ExercisesScreen = () => {
     )?.[0]?.translation;
     try {
       if (!selectedWord) {
-        return;
+        throw new Error("Word not selected");
       }
       if (currentStatus === "active") {
         if (selectedWord === wordTranslated) {
@@ -126,7 +102,8 @@ export const ExercisesScreen = () => {
       } else {
         setCurrentPosition((prevState) => {
           if (sentences?.length && sentences.length <= prevState + 1) {
-            return 0;
+            navigate(Routes.Finished);
+            return prevState;
           } else {
             return prevState + 1;
           }
@@ -134,7 +111,9 @@ export const ExercisesScreen = () => {
         setSelectedWord(undefined);
         setCurrentStatus("waiting");
       }
-    } catch (error) {}
+    } catch (error) {
+      alert({ message: "Choose a word to continue.", type: "error" });
+    }
   };
 
   useEffect(() => {
@@ -151,7 +130,17 @@ export const ExercisesScreen = () => {
           <>
             {renderMainSentence()}
             {renderSentenceTranslated()}
-            {renderWords()}
+            <WordListComponent
+              exercise={exercise!}
+              type={
+                currentStatus === "contrast" || currentStatus === "error"
+                  ? "disabled"
+                  : "primary"
+              }
+              setSelectedWord={setSelectedWord}
+              setCurrentStatus={setCurrentStatus}
+              selectedWord={selectedWord}
+            />
           </>
         )}
       </Container>

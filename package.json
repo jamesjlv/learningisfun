@@ -7,9 +7,10 @@
     "android": "expo run:android",
     "reinstall": "rm -rf node_modules/ && yarn install",
     "clean:android": "cd android && ./gradlew clean && cd ..",
+    "keystore": "cd android/app && [ ! -f learningisfun.keystore ] && keytool -genkeypair -v -storetype PKCS12 -keystore learningisfun.keystore -alias learningisfun -keyalg RSA -keysize 2048 -validity 10000 -noprompt -storepass Test@123 -keypass Test@123 -dname \"CN=Unknown, OU=james, O=james, L=São Paulo, S=São Paulo, C=BR\" || echo \"com.learningisfun\" && cd ../..",
     "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios/learningisfun'",
     "build:apk": "cd android && ./gradlew assembleRelease && cd .. && yarn install:apk",
-    "build:android:production": "yarn reinstall && yarn clean:android && yarn build:apk",
+    "build:android:production": "yarn keystore && yarn reinstall && yarn clean:android && yarn build:apk",
     "ios": "expo run:ios",
     "web": "expo start --web",
     "install:apk": "adb install ./android/app/build/outputs/apk/release/app-release.apk"
