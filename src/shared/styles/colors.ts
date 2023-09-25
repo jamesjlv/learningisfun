@@ -7,6 +7,7 @@ export const Colors = {
     blue: "#2B4B5D",
     white: "#FFFFFF",
     title: "#EFEFEF",
+    green: "#63A66A",
   },
   button: {
     active: "#16E3E7",
