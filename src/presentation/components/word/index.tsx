@@ -10,7 +10,6 @@ export const WordComponent: React.FC<WordComponentProps> = ({
   styleType = "waiting",
   ...rest
 }) => {
-  console.log({ word, styleType });
   return (
     <WordButton
       selected={selected}
