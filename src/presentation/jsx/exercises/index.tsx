@@ -23,11 +23,12 @@ import {
 } from "./styles";
 import { ButtonTitle, ExercisesRoutesProps } from "./props";
 import { useAlert } from "@/presentation/hooks/methods/alert";
+import { Routes } from "@/main";
 
 export const ExercisesScreen = () => {
   const params = useRoute().params as ExercisesRoutesProps;
   const { alert } = useAlert();
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
   const [currentPosition, setCurrentPosition] = useState(0);
   const { sentences, handleGetSentences } = useExercices();
@@ -122,7 +123,8 @@ export const ExercisesScreen = () => {
       } else {
         setCurrentPosition((prevState) => {
           if (sentences?.length && sentences.length <= prevState + 1) {
-            return 0;
+            navigate(Routes.Finished);
+            return prevState;
           } else {
             return prevState + 1;
           }
