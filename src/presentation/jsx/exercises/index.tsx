@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useSharedValue } from "react-native-reanimated";
 
 import FlagSvg from "@assets/icons/flag.svg";
 import { useExercices } from "@/presentation/hooks";
@@ -8,6 +9,7 @@ import { ButtonComponentProps } from "@/presentation/components/button/props";
 import {
   SentenceLineComponent,
   WordComponent,
+  WordListComponent,
 } from "@/presentation/components";
 import {
   ButtonFeedbackContainer,
@@ -64,29 +66,6 @@ export const ExercisesScreen = () => {
         <FocusedWord>{exercise?.choosedWord}</FocusedWord>
         {sentenceSplited?.[1]}
       </MainSentence>
-    );
-  };
-
-  const renderWords = () => {
-    return (
-      <Words>
-        {exercise?.answerOptions?.map((item, index) => (
-          <WordComponent
-            key={item + index}
-            onPress={() => {
-              setSelectedWord(item);
-              setCurrentStatus("active");
-            }}
-            word={item}
-            selected={selectedWord === item}
-            type={
-              currentStatus === "contrast" || currentStatus === "error"
-                ? "disabled"
-                : "primary"
-            }
-          />
-        ))}
-      </Words>
     );
   };
 
@@ -151,7 +130,17 @@ export const ExercisesScreen = () => {
           <>
             {renderMainSentence()}
             {renderSentenceTranslated()}
-            {renderWords()}
+            <WordListComponent
+              exercise={exercise!}
+              type={
+                currentStatus === "contrast" || currentStatus === "error"
+                  ? "disabled"
+                  : "primary"
+              }
+              setSelectedWord={setSelectedWord}
+              setCurrentStatus={setCurrentStatus}
+              selectedWord={selectedWord}
+            />
           </>
         )}
       </Container>
